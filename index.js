@@ -17,6 +17,7 @@ class GuideBot extends Client {
   constructor (options) {
     super(options);
 
+    
     // Here we load the config.js file that contains our token and our prefix values.
     this.config = require("./config.js");
     // client.config.token contains the bot's token
@@ -181,10 +182,16 @@ class GuideBot extends Client {
   }
 }
 
+// Default Intents the bot needs.
+// By default GuideBot needs Guilds, Guild Messages and Direct Messages to work.
+// For join messages to work you need Guild Members, which is privileged and requires extra setup.
+// For more info about intents see the README.
+const intents = ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"];
+
 // This is your client. Some people call it `bot`, some people call it `self`,
 // some might call it `cootchie`. Either way, when you see `client.something`,
 // or `bot.something`, this is what we're refering to. Your client.
-const client = new GuideBot();
+const client = new GuideBot({ ws: {intents: intents } });
 
 // We're doing real fancy node 8 async/await stuff here, and to do that
 // we need to wrap stuff in an anonymous function. It's annoying but it works.
