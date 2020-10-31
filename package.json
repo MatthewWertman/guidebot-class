@@ -1,7 +1,7 @@
 {
-  "name": "guidebot",
+  "name": "boilerplate-class",
   "version": "6.1.0",
-  "description": "A boilerplate example bot with command handler and reloadable commands. Updated and Maintained by the Idiot's Guide Community",
+  "description": "A modified Discord bot boilerplate (w/ classes). Forked from guidebot-class",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/An-Idiots-Guide/guidebot-class.git"
+    "url": "git+https://github.com/MatthewWertman/guidebot-class.git"
   },
   "author": "Evelyne Lachance <eslachance@gmail.com> (http://evie.codes)",
   "contributors": [
@@ -25,14 +25,9 @@
   },
   "homepage": "https://github.com/An-Idiots-Guide/guidebot-class#readme",
   "dependencies": {
-    "better-sqlite3": "^5.4.1",
-    "chalk": "^2.4.1",
-    "discord.js": "^12.1.1",
-    "enmap": "^5.0.1",
-    "klaw": "^2.1.1",
-    "moment": "^2.22.2",
-    "moment-duration-format": "^2.2.2",
-    "readline-sync": "^1.4.9"
+    "discord.js": "^12.4.1",
+    "moment": "^2.24.0",
+    "moment-duration-format": "^2.3.2",
   },
   "devDependencies": {
     "eslint": "^6.0.1",
