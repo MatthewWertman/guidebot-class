@@ -35,16 +35,18 @@ require("./modules/functions.js")(client);
 
 const init = async () => {
 
-    // Here we load **commands** into memory, as a collection, so they're accessible
-    // here and everywhere else.
-    // klaw("./commands").on("data", (item) => {
-    //   const cmdFile = path.parse(item.path);
-    //   if (!cmdFile.ext || cmdFile.ext !== ".js") return;
-    //   const response = client.loadCommand(cmdFile.dir, `${cmdFile.name}${cmdFile.ext}`);
-    //   if (response) client.logger.error(response);
-    // });
+    // Commands
+    const cmdFiles = await readdir("./commands/");
+    console.log(`Loading a total of ${cmdFiles.length} commands.`);
+    cmdFiles.forEach(f => {
+        const props = require(`./commands/${f}`);
+        client.commands.set(props.help.name, props);
+        props.conf.aliases.forEach(alias => {
+            client.aliases.set(alias, props.help.name);
+        });
+    });
 
-    // Then we load events, which will include our message and ready event.
+    // Events
     const evtFiles = await readdir("./events/");
     client.logger.log(`Loading a total of ${evtFiles.length} events.`, "log");
     evtFiles.forEach(file => {
@@ -69,7 +71,7 @@ const init = async () => {
 
 init();
 
-client.on("disconnect", () => client.logger.warn("Bot is disconnecting..."))
-    .on("reconnecting", () => client.logger.log("Bot reconnecting...", "log"))
-    .on("error", e => client.logger.error(e))
-    .on("warn", info => client.logger.warn(info));
+client.on("disconnect", () => console.warn("Bot is disconnecting..."))
+    .on("reconnecting", () => console.log("Bot reconnecting..."))
+    .on("error", e => console.error(e))
+    .on("warn", info => console.warn(info));
