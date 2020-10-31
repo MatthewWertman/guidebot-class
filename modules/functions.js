@@ -47,24 +47,21 @@ module.exports = (client) => {
         return text;
     };
 
-    client.reload = command => {
-        return new Promise((resolve, reject) => {
-            try {
-                delete require.cache[require.resolve(`../commands/${command}`)];
-                const cmd = require(`../commands/${command}`);
-                client.commands.delete(command);
-                client.aliases.forEach((cmd, alias) => {
-                    if (cmd === command) client.aliases.delete(alias);
-                });
-                client.commands.set(command, cmd);
-                cmd.conf.aliases.forEach(alias => {
-                    client.aliases.set(alias, cmd.help.name);
-                });
-                resolve();
-            } catch (e) {
-                reject(e);
+    client.loadCommand = (commandName) => {
+        try {
+            const props = new (require(`../commands/${commandName}`))(client);
+            console.log(`Loading Command: ${props.help.name}. 👌`);
+            if (props.init) {
+                props.init(client);
             }
-        });
+            client.commands.set(props.help.name, props);
+            props.conf.aliases.forEach(alias => {
+                client.aliases.set(alias, props.help.name);
+            });
+            return false;
+        } catch (e) {
+            return `Unable to load command ${commandName}: ${e}`;
+        }
     };
 
     client.unloadCommand = async (commandName) => {

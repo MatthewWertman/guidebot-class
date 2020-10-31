@@ -10,7 +10,7 @@ const {
 const readdir = promisify(require("fs").readdir);
 
 
-class GuideBot extends Client {
+class BoilerPlate extends Client {
     constructor (options) {
         super(options);
 
@@ -24,7 +24,7 @@ class GuideBot extends Client {
 }
 
 const intents = ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"];
-const client = new GuideBot({
+const client = new BoilerPlate({
     ws: {
         intents: intents
     }
@@ -39,21 +39,17 @@ const init = async () => {
     const cmdFiles = await readdir("./commands/");
     console.log(`Loading a total of ${cmdFiles.length} commands.`);
     cmdFiles.forEach(f => {
-        const props = require(`./commands/${f}`);
-        client.commands.set(props.help.name, props);
-        props.conf.aliases.forEach(alias => {
-            client.aliases.set(alias, props.help.name);
-        });
+        const res = client.loadCommand(f);
+        if (res) console.error(res);
     });
 
     // Events
     const evtFiles = await readdir("./events/");
-    client.logger.log(`Loading a total of ${evtFiles.length} events.`, "log");
+    console.log(`Loading a total of ${evtFiles.length} events.`);
     evtFiles.forEach(file => {
         const eventName = file.split(".")[0];
-        client.logger.log(`Loading Event: ${eventName}`);
+        console.log(`Loading Event: ${eventName}`);
         const event = new(require(`./events/${file}`))(client);
-        // This line is awesome by the way. Just sayin'.
         client.on(eventName, (...args) => event.run(...args));
         delete require.cache[require.resolve(`./events/${file}`)];
     });

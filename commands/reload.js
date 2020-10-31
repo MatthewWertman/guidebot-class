@@ -7,32 +7,24 @@ class Reload extends Command {
             description: "Reloads a command that has been modified.",
             category: "System",
             usage: "reload [command]",
+            aliases: ["r"],
             permLevel: "Bot Admin"
         });
     }
 
     async run (message, args, level) { // eslint-disable-line no-unused-vars
-        let command;
         if (!args || args.size < 1) return message.reply("Must provide a command to reload.");
-        if (this.client.commands.has(args[0])) {
-            command = args[0];
-        } else if (this.client.aliases.has(args[0])) {
-            command = this.client.aliases.get(args[0]);
-        }
-        if (!command) {
-            return message.channel.send(`I cannot find the command: ${args[0]}`);
-        } else {
-            message.channel.send(`Reloading ${command}`)
-                .then(m => {
-                    this.client.reload(command)
-                        .then(() => {
-                            m.edit(`Successfully reloaded: ${command}`);
-                        })
-                        .catch(e => {
-                            m.edit(`Command reload failed: ${command}\n\`\`\`${e.stack}\`\`\``);
-                        });
-                });
-        }
+
+        const commands = this.client.commands.get(args[0]) || this.client.commands.get(this.client.aliases.get(args[0]));
+        if (!commands) return message.reply(`The command \`${args[0]}\` does not exist, nor is it an alias.`);
+
+        let response = await this.client.unloadCommand(commands.help.name);
+        if (response) return message.reply(`Error Unloading: ${response}`);
+
+        response = this.client.loadCommand(commands.help.name);
+        if (response) return message.reply(`Error loading: ${response}`);
+
+        message.reply(`The command \`${commands.help.name}\` has been reloaded`);
     }
 }
 module.exports = Reload;
