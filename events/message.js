@@ -6,17 +6,13 @@ module.exports = class {
     async run (message) {
         if (message.author.bot) return;
 
-        // Cancel any attempt to execute commands if the bot cannot respond to the user.
         if (message.guild && !message.channel.permissionsFor(message.guild.me).missing("SEND_MESSAGES")) return;
 
-        // Checks if the bot was mentioned, with no message after it, returns the prefix.
         const prefixMention = new RegExp(`^<@!?${this.client.user.id}> ?$`);
         if (message.content.match(prefixMention)) {
             return message.reply(`My prefix on this guild is \`${this.client.config.botSettings.prefix}\``);
         }
 
-        // Also good practice to ignore any message that does not start with our prefix,
-        // which is set in the configuration file.
         if (message.content.indexOf(this.client.config.botSettings.prefix) !== 0) return;
 
         const args = message.content.slice(this.client.config.botSettings.prefix.length).trim().split(/ +/g);
