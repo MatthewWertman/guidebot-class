@@ -11,14 +11,15 @@ Major Changes:
 
 * Updated to Discord.js 12.4.1
 * Removed `better-sqlite3`, `chalk`, `enmap`, `klaw`, `readline-sync` as dependencies
+* Moved functions to modules/functions.js
 * Removed Logger module (replaced with console.log())
 * Removed conf and set command files
 * Removed 'setup.js' and npm preinstall script
 * Added `setactivity`, `setstatus`, `info`, `pfp`, `settings` and `echo` commands
-* Replaced client.loadCommand() function with client.reload() (See modules/funtions.js)
-* Removed perm levels 2 and 3 from config example
+
 
 Minor Changes:
 
+* Removed perm levels 2 and 3 from config example
 * Changed intents to 4 spaces
 * Removed most comments
