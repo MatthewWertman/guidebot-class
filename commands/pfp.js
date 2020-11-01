@@ -12,7 +12,7 @@ class Pfp extends Command {
         });
     }
 
-    async run (client, message, args, level) { //eslint-disable-line no-unused-vars
+    async run (message, args, level) { //eslint-disable-line no-unused-vars
         if (!message.mentions.users.size) return message.channel.send(`Your avatar: ${message.author.displayAvatarURL()}`);
         const avatarList = message.mentions.users.map(user => {
             return `${user.username}'s avatar: ${user.displayAvatarURL()}`;

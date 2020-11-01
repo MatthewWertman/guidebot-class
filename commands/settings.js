@@ -17,7 +17,7 @@ class Settings extends Command {
         });
     }
 
-    async run (client, message, args) {
+    async run (message, args, level) { // eslint-disable-line no-unused-vars
         const configEmbed = new MessageEmbed()
             .setTitle("Current Settings")
             .setColor("#d64027")
@@ -40,14 +40,14 @@ class Settings extends Command {
             numOfChanges = 1;
         }
         while (times < numOfChanges) {
-            const setting = await client.awaitReply(message, "What setting do you want to change?");
+            const setting = await this.client.awaitReply(message, "What setting do you want to change?");
             for (var i = 0; i < configEmbedJSON.fields.length; i++) {
                 if (setting === configEmbedJSON.fields[i].name || setting === configEmbedJSON.fields[i].name.toLowerCase()) {
-                    var value = await client.awaitReply(message, `What value should ${setting} be? NOTE: bot will restart afterwards`);
+                    var value = await this.client.awaitReply(message, `What value should ${setting} be? NOTE: bot will restart afterwards`);
                     if (value === false) {
-                        const retry = await client.awaitReply(message, "It seems that something went wrong or you took too long to respond. Do you want to retry? (y/n)");
+                        const retry = await this.client.awaitReply(message, "It seems that something went wrong or you took too long to respond. Do you want to retry? (y/n)");
                         if (retry === "y") {
-                            value = await client.awaitReply(message, `What value should ${setting} be?`);
+                            value = await this.client.awaitReply(message, `What value should ${setting} be?`);
                             newValue = configFile.replace(new RegExp(`"${configEmbedJSON.fields[i].value}"`), `"${value}"`);
                             fs.writeFileSync("./config.js", newValue);
                             console.log("Updated config file");
@@ -63,8 +63,8 @@ class Settings extends Command {
             }
             times++;
         }
-        client.commands.forEach(async cmd => {
-            await client.unloadCommand(cmd);
+        this.client.commands.forEach(async cmd => {
+            await this.client.unloadCommand(cmd);
         });
         process.exit(1);
     }

@@ -13,7 +13,7 @@ class Setstatus extends Command {
         });
     }
 
-    async run (client, message, args, level) { //eslint-disable-line no-unused-vars
+    async run (message, args, level) { //eslint-disable-line no-unused-vars
         if (!args[0] && args.length === 0) return message.channel.send(`USAGE: ${exports.help.usage}`);
         var result = args.join(" ");
         if (!result) {

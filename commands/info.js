@@ -14,7 +14,7 @@ class Info extends Command {
         });
     }
 
-    async run (client, message, args, level) { //eslint-disable-line no-unused-vars
+    async run (message, args, level) { //eslint-disable-line no-unused-vars
         if (!message.mentions.users.size) return message.channel.send(`You need to mention someone. ${exports.help.usage}`);
         var member = message.guild.member(message.mentions.users.first());
         message.mentions.users.map(user => {

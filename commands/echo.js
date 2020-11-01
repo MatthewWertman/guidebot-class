@@ -12,10 +12,9 @@ class Echo extends Command {
         });
     }
 
-    async run (client, message, args, level) { //eslint-disable-line no-unused-vars
-        if (!args[0] && args.length === 0) return message.channel.send(`Please input text. USAGE: ${exports.help.usage}`);
+    async run (message, args, level) { //eslint-disable-line no-unused-vars
+        if (!args && args.size < 1) return message.channel.send(`Please input text. USAGE: ${exports.help.usage}`);
         let channel;
-        //var guild = client.guilds.cache.get(config.guildID);
         var text = args.slice(1, args.length).join(" ");
 
         if (!message.mentions.channels.size) {

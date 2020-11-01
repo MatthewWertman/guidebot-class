@@ -13,7 +13,7 @@ class Setactivity extends Command {
         });
     }
 
-    async run (client, message, args, level) { //eslint-disable-line no-unused-vars
+    async run (message, args, level) { //eslint-disable-line no-unused-vars
         if (!args[0]) return message.channel.send(`Please input a paramater. USAGE: ${exports.help.usage}`);
         var option = args[0];
         var result = args.join(" ");
