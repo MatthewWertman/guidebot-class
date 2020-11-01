@@ -7,7 +7,7 @@ const config = {
 
     "token": "mfa.VkO_2G4Qv3T--NO--lWetW_tjND--TOKEN--QFTm6YGtzq9PH--4U--tG0",
     "prefix": "",
-    "defaultSettings": {
+    "botSettings": {
         "prefix": "-",
         "systemNotice": "true",
         "welcomeEnabled": "false",
