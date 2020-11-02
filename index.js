@@ -8,6 +8,10 @@ const {
     promisify
 } = require("util");
 const readdir = promisify(require("fs").readdir);
+const moment = require("moment");
+const log = message => {
+    console.log(`[${moment().format("YYYY-MM-DD HH:mm:ss")}] ${message}`);
+};
 
 
 class BoilerPlate extends Client {
@@ -37,7 +41,7 @@ const init = async () => {
 
     // Commands
     const cmdFiles = await readdir("./commands/");
-    console.log(`Loading a total of ${cmdFiles.length} commands.`);
+    log(`Loading a total of ${cmdFiles.length} commands.`);
     cmdFiles.forEach(f => {
         const res = client.loadCommand(f);
         if (res) console.error(res);
@@ -45,7 +49,7 @@ const init = async () => {
 
     // Events
     const evtFiles = await readdir("./events/");
-    console.log(`Loading a total of ${evtFiles.length} events.`);
+    log(`Loading a total of ${evtFiles.length} events.`);
     evtFiles.forEach(file => {
         const eventName = file.split(".")[0];
         console.log(`Loading Event: ${eventName}`);
