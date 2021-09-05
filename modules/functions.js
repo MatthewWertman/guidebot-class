@@ -31,7 +31,7 @@ module.exports = (client) => {
         }
     };
 
-    client.clean = async (client, text) => {
+    client.clean = async (text) => {
         if (text && text.constructor.name == "Promise")
             text = await text;
         if (typeof text !== "string")
