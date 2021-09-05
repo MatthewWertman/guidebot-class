@@ -1,4 +1,5 @@
-if (Number(process.version.slice(1).split(".")[0]) < 12) throw new Error("Node 12.0.0 or higher is required. Update Node on your system.");
+let nVersionArr = process.version.slice(1).split(".").map((x) => +x);
+if (nVersionArr[0] < 16 || nVersionArr[1] < 6) throw new Error("Node 16.6.0 or higher is required. Update Node on your system.");
 
 const {
     Client,
