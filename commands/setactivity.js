@@ -17,7 +17,8 @@ class Setactivity extends Command {
         if (!args[0]) return message.channel.send(`Please input a paramater. USAGE: ${exports.help.usage}`);
         var option = args[0];
         var result = args.join(" ");
-        if (option.length >= 1 && isNaN(Number(option)) || args.length === 1 && !isNaN(Number(option))) {
+
+        if (option.length > 1 && isNaN(Number(option)) || args.length === 1 && !isNaN(Number(option))) {
             option = 0;
         } else {
             option = Number(args[0]);
