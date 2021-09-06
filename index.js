@@ -30,9 +30,7 @@ class BoilerPlate extends Client {
 
 const intents = ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"];
 const client = new BoilerPlate({
-    ws: {
-        intents: intents
-    }
+    intents: intents
 });
 
 // functions

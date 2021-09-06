@@ -21,7 +21,7 @@ class Stats extends Command {
             .setColor(0x00ff00)
             .setTitle("STATISTICS")
             .addField("🤓", `• Mem Usage: ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB\n• Uptime: ${duration}\n• Users: ${this.client.users.cache.size.toLocaleString()}\n• Servers: ${this.client.guilds.cache.size.toLocaleString()}\n• Channels: ${this.client.channels.cache.size.toLocaleString()}\n• Discord.js: v${version}\n• Node: ${process.version}`);
-        message.channel.send(embed);
+        message.channel.send({embeds: [embed]});
     }
 }
 

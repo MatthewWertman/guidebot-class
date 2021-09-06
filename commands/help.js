@@ -24,22 +24,22 @@ class Help extends Command {
 
             // Here we have to get the command names only, and we use that array to get the longest name.
             // This make the help commands "aligned" in the output.
-            const commandNames = myCommands.keyArray();
+            const commandNames = [...myCommands.keys()]
             const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
             let currentCategory = "";
             embed = new MessageEmbed()
                 .setColor(0xff0000)
                 .setTitle(`= Command List =\n\n[Use ${this.client.config.botSettings.prefix}help <commandname> for details]\n`);
-            const sorted = myCommands.array().sort((p, c) => p.help.category > c.help.category ? 1 :  p.help.name > c.help.name && p.help.category === c.help.category ? 1 : -1 );
+            const sorted = [...myCommands.values()].sort((p, c) => p.help.category > c.help.category ? 1 :  p.help.name > c.help.name && p.help.category === c.help.category ? 1 : -1 );
             sorted.forEach( c => {
                 const cat = c.help.category.toProperCase();
                 if (currentCategory !== cat) {
                     embed.addField(`\u200b\n== ${cat} ==\n`, "\u200b");
                     currentCategory = cat;
                 }
-                embed.addField(`${this.client.config.botSettings.prefix}${c.help.name}${" ".repeat(longest - c.help.name.length)}: ${c.help.description}\n`);
+                embed.addField(`${this.client.config.botSettings.prefix}${c.help.name}${" ".repeat(longest - c.help.name.length)}: ${c.help.description}\n`, "\u200b");
             });
-            message.author.send(embed);
+            message.author.send({embeds: [embed]});
         } else {
             // Show individual command's help.
             let command = args[0];
@@ -50,7 +50,7 @@ class Help extends Command {
                     .setColor(0xff0000)
                     .setTitle(`${command.help.name.toUpperCase()}`)
                     .addField(`${command.help.description}`, `alises: ${command.conf.aliases.join(", ")}\nusage: ${command.help.usage}`);
-                message.channel.send(embed);
+                message.channel.send({embeds: [embed]});
             }
         }
     }

@@ -16,29 +16,29 @@ class Info extends Command {
 
     async run (message, args, level) { //eslint-disable-line no-unused-vars
         if (!message.mentions.users.size) return message.channel.send(`You need to mention someone. ${exports.help.usage}`);
-        var member = message.guild.member(message.mentions.users.first());
-        message.mentions.users.map(user => {
-            var userEmbed = new MessageEmbed()
-                .setColor("#9689b9")
-                .setAuthor(`${user.tag}`, `${user.displayAvatarURL()}`)
-                .addField("Username", `${user.username}`, true)
-                .addField("Discriminator", `${user.discriminator}`, true)
-                .addField("Display Name", `${member.displayName}`, true)
-                .addField("ID", `${user.id}`, true)
-                .addField("Bot", `${user.bot}`, true)
-                .addField("Created", `${user.createdAt}`, true)
-                .addField("Account Age", `${Math.round((Date.now() - user.createdAt.getTime()) / (1000*60*60*24))} days`, true)
-                .addField("Server Age", `${Math.round((Date.now() - member.joinedAt.getTime()) / (1000*60*60*24))} days`, true)
-                .addField("Roles", `${member.roles.cache.map(role => {
-                    for (const index in member.roles.cache.keyArray().name) {
-                        role += `${member.roles.cache.keyArray()[index]}` + ", ";
-                    }
-                    return role;
+        var user = message.mentions.users.first();
+        var member = message.guild.members.cache.get(user.id);
 
-                })}`, true);
+        var userEmbed = new MessageEmbed()
+            .setColor("#9689b9")
+            .setAuthor(`${user.tag}`, `${user.displayAvatarURL()}`)
+            .addField("Username", `${user.username}`, true)
+            .addField("Discriminator", `${user.discriminator}`, true)
+            .addField("Display Name", `${member.displayName}`, true)
+            .addField("ID", `${user.id}`, true)
+            .addField("Bot", `${user.bot}`, true)
+            .addField("Created", `${user.createdAt}`, true)
+            .addField("Account Age", `${Math.round((Date.now() - user.createdAt.getTime()) / (1000*60*60*24))} days`, true)
+            .addField("Server Age", `${Math.round((Date.now() - member.joinedAt.getTime()) / (1000*60*60*24))} days`, true)
+            .addField("Roles", `${member.roles.cache.map(role => {
+                for (const index in [...member.roles.cache.keys()].name) {
+                    role += `${[...member.roles.cache.keys()][index]}` + ", ";
+                }
+                return role;
 
-            return message.channel.send(userEmbed);
-        });
+            })}`, true);
+
+        message.channel.send({embeds: [userEmbed]});
     }
 }
 

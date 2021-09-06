@@ -13,9 +13,9 @@ module.exports = class {
         // This loop ensures that client.appInfo always contains up to date data
         // about the app's status. This includes whether the bot is public or not,
         // its description, owner, etc. Used for the dashboard amongs other things.
-        this.client.appInfo = await this.client.fetchApplication();
+        this.client.appInfo = await this.client.application.fetch();
         setInterval(async () => {
-            this.client.appInfo = await this.client.fetchApplication();
+            this.client.appInfo = await this.client.application.fetch();
         }, 60000);
 
         // Set the game as the default help command + guild count.

@@ -20,7 +20,8 @@ module.exports = (client) => {
         const filter = m => m.author.id === msg.author.id;
         await msg.channel.send(question);
         try {
-            const collected = await msg.channel.awaitMessages(filter, {
+            const collected = await msg.channel.awaitMessages({
+                filter,
                 max: 1,
                 time: limit,
                 errors: ["time"]
