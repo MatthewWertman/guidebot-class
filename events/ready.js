@@ -1,3 +1,6 @@
+const { REST } = require("@discordjs/rest");
+const { Routes } = require("discord-api-types/v9");
+
 module.exports = class {
     constructor (client) {
         this.client = client;
@@ -9,6 +12,25 @@ module.exports = class {
         // guild information will come in *after* ready. 1s is plenty, generally,
         // for all of them to be loaded.
         await this.client.wait(1000);
+
+        if (this.client.config.botSettings.updateGlobalSlashes === "true") {
+            const rest = new REST({ version: "9" }).setToken(this.client.config.token);
+
+            try {
+                console.log("Started refreshing application (/) commands.");
+                await rest.put(
+                    Routes.applicationCommands(this.client.user.id),
+                    { body: this.client.slashCommands },
+                );
+
+                console.log("Successfully registered application commands.");
+            } catch (error) {
+                console.error(error);
+            }
+        } else {
+            console.log("Skipping to refresh application (/) commands.");
+        }
+
 
         // This loop ensures that client.appInfo always contains up to date data
         // about the app's status. This includes whether the bot is public or not,

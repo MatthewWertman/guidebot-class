@@ -22,6 +22,7 @@ class BoilerPlate extends Client {
         this.config = require("./config.js");
 
         this.commands = new Collection();
+        this.slashCommands = [];
         this.aliases = new Collection();
 
         this.wait = require("util").promisify(setTimeout);
@@ -45,6 +46,18 @@ const init = async () => {
         const res = client.loadCommand(f);
         if (res) console.error(res);
     });
+
+    // Slash commands
+    if (client.config.botSettings.disableSlashes === "false") {
+        for (const file of cmdFiles) {
+            const cmdName = file.split(".")[0];
+            const command = new (require(`./commands/${file}`))(client);
+            if (command.conf.slashEnable) {
+                console.log(`Loading ${cmdName} as slash command.`);
+                client.slashCommands.push(command.data.toJSON());
+            }
+        }
+    }
 
     // Events
     const evtFiles = await readdir("./events/");
