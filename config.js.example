@@ -9,10 +9,14 @@ const config = {
 
     "botSettings": {
         "prefix": "~",
+        "clientId": "",
+        "defaultGuildId": "",
         "systemNotice": "true",
         "welcomeEnabled": "false",
         "welcomeChannel": "welcome",
         "welcomeMessage": "Say hello to {{user}}, everyone!",
+        "updateGlobalSlashes": "true",
+        "disableSlashes": "false",
     },
 
     // PERMISSION LEVEL DEFINITIONS.
