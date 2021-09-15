@@ -1,4 +1,5 @@
 const Command = require("../base/Command.js");
+const { SlashCommandBuilder } = require("@discordjs/builders");
 
 class Ping extends Command {
     constructor (client) {
@@ -6,6 +7,10 @@ class Ping extends Command {
             name: "ping",
             description: "Latency and API response times.",
             category: "System",
+            data: new SlashCommandBuilder()
+                .setName("ping")
+                .setDescription("Latency and API response times."),
+            slashEnable: true,
             usage: "ping",
             aliases: ["pong"]
         });
@@ -17,6 +22,15 @@ class Ping extends Command {
             msg.edit(`🏓 Pong! (Roundtrip took: ${msg.createdTimestamp - message.createdTimestamp}ms. 💙: ${Math.round(this.client.ws.ping)}ms.)`);
         } catch (e) {
             console.log(e);
+        }
+    }
+
+    async interact (interaction) {
+        try {
+            const initReply = await interaction.reply({content: "🏓 Ping!", fetchReply: true});
+            await interaction.editReply(`🏓 Pong! (Roundtrip took: ${initReply.createdTimestamp - interaction.createdTimestamp}ms. 💙: ${Math.round(interaction.client.ws.ping)}ms.)`);
+        } catch (err) {
+            console.error(err);
         }
     }
 }

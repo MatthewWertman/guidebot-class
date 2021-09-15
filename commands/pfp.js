@@ -1,4 +1,6 @@
+const { SlashCommandBuilder } = require("@discordjs/builders");
 const Command = require("../base/Command.js");
+
 
 class Pfp extends Command {
     constructor (client) {
@@ -6,6 +8,11 @@ class Pfp extends Command {
             name: "pfp",
             description: "Sends a link of your avatar.",
             category:"Miscellaneous",
+            data: new SlashCommandBuilder()
+                .setName("pfp")
+                .setDescription("Sends a link of your or another user's avatar.")
+                .addUserOption(option => option.setName("target").setDescription("Select a user")),
+            slashEnable: true,
             usage: "pfp [member], where [member] is an optional mentioned member.",
             aliases: [],
             permLevel: "User"
@@ -14,8 +21,14 @@ class Pfp extends Command {
 
     async run (message, args, level) { //eslint-disable-line no-unused-vars
         if (!message.mentions.users.size) return message.channel.send(`Your avatar: ${message.author.displayAvatarURL()}`);
-        let user = message.mentions.users.first();
+        const user = message.mentions.users.first();
         message.channel.send(`${user.username}'s avatar: ${user.displayAvatarURL()}`);
+    }
+
+    async execute (interaction) {
+        const user = interaction.options.getUser("target");
+        if (!user) return interaction.reply(`Your avatar: ${interaction.user.displayAvatarURL()}`);
+        await interaction.reply(` ${user.username}'s avatar: ${user.displayAvatarURL()}`);
     }
 }
 
