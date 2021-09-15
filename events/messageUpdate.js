@@ -9,4 +9,4 @@ module.exports = class {
         // manually call messageCreate event.
         messageCreate.run(newMessage);
     }
-}
+};
