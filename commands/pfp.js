@@ -25,7 +25,7 @@ class Pfp extends Command {
         message.channel.send(`${user.username}'s avatar: ${user.displayAvatarURL()}`);
     }
 
-    async execute (interaction) {
+    async interact (interaction) {
         const user = interaction.options.getUser("target");
         if (!user) return interaction.reply(`Your avatar: ${interaction.user.displayAvatarURL()}`);
         await interaction.reply(` ${user.username}'s avatar: ${user.displayAvatarURL()}`);
