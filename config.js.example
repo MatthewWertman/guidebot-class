@@ -30,24 +30,24 @@ const config = {
         {
             level: 4,
             name: "Server Owner",
-            check: (message) => message.channel.type === "text" ? (message.guild.owner.user.id === message.author.id ? true : false) : false
+            check: (message) => message.channel.type === "GUILD_TEXT" ? (message.guild.owner.user.id === message.member.id ? true : false) : false
         },
         {
             level: 8,
             name: "Bot Support",
-            check: (message) => config.support.includes(message.author.id)
+            check: (message) => config.support.includes(message.author?.id) || config.support.includes(message.member.id)
         },
 
         {
             level: 9,
             name: "Bot Admin",
-            check: (message) => config.admins.includes(message.author.id)
+            check: (message) => config.admins.includes(message.author?.id) || config.support.includes(message.member.id)
         },
 
         {
             level: 10,
             name: "Bot Owner",
-            check: (message) => message.client.appInfo.owner.id === message.author.id
+            check: (message) => message.client.application.owner.id === message.author?.id || message.client.application.owner.id === message.member.id
         }
     ]
 };
