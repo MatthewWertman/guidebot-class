@@ -9,7 +9,7 @@ class Setstatus extends Command {
             description: "sets the bot's current state",
             usage: "setstatus <status>",
             aliases: ["setStat", "ss"],
-            permLevel: "Bot Owner"
+            permLevel: "Bot Support"
         });
     }
 
