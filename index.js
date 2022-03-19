@@ -9,9 +9,9 @@ const {
     promisify
 } = require("util");
 const readdir = promisify(require("fs").readdir);
-const moment = require("moment");
+const dayjs = require("dayjs");
 const log = message => {
-    console.log(`[${moment().format("YYYY-MM-DD HH:mm:ss")}] ${message}`);
+    console.log(`[${dayjs().format("YYYY-MM-DD HH:mm:ss")}] ${message}`);
 };
 
 

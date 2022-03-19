@@ -4,8 +4,9 @@ const {
     MessageEmbed
 } = require("discord.js");
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const moment = require("moment");
-require("moment-duration-format");
+const dayjs = require("dayjs");
+const duration = require("dayjs/plugin/duration");
+dayjs.extend(duration);
 
 class Stats extends Command {
     constructor (client) {
@@ -22,7 +23,7 @@ class Stats extends Command {
     }
 
     createStatsEmbed () {
-        const duration = moment.duration(this.client.uptime).format(" D [days], H [hrs], m [mins], s [secs]");
+        const duration = dayjs.duration(this.client.uptime).format(" D [days], H [hrs], m [mins], s [secs]");
         return new MessageEmbed()
             .setColor(0x00ff00)
             .setTitle("STATISTICS")
