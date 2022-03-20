@@ -1,11 +1,12 @@
 const Command = require("../base/Command.js");
 const {MessageEmbed} = require("discord.js");
 const fs = require("fs");
-const configFile = fs.readFileSync("./config.js", "utf-8");
 const configEmbed = new MessageEmbed()
     .setTitle("Current Settings")
     .setColor("#d64027")
-    .setDescription("There are the current settings for bot.");
+    .setDescription("Here are the current settings for the bot.");
+let configFile = fs.readFileSync("./config.js", "utf-8");
+let shouldExit = false;
 
 
 class Settings extends Command {
@@ -39,10 +40,12 @@ class Settings extends Command {
 
         let newValue;
         let defValue;
-        while (true) { // eslint-disable-line no-constant-condition
+        while (!shouldExit) {
+            configFile = fs.readFileSync("./config.js", "utf-8");
             const setting = await this.client.awaitReply(message, "What setting do you want to change?");
             // console.log(setting);
-            switch (setting) {
+          
+            switch (Object.prototype.toString(setting)) {
                 case "cancel":
                 case "revert all":
                 {
@@ -78,18 +81,22 @@ class Settings extends Command {
                     process.exit(1);
                     break;
                 }
-
-                case false:
-                {
+                case "[object Object]":
                     message.channel.send("Timeout or something else occurred. Exiting...");
+                    shouldExit = true;
                     break;
-                }
                 default:
                 {
                     for (var i = 0; i < embedJSON.fields.length; i++) {
                         if (setting === embedJSON.fields[i].name || setting === embedJSON.fields[i].name.toLowerCase()) {
                             var value = await this.client.awaitReply(message, `What value should ${setting} be?`);
-                            newValue = configFile.replace(new RegExp(`"${embedJSON.fields[i].value}"`), `"${value}"`);
+                            if (typeof value != "string") {
+                                message.channel.send("Timeout or something else occurred. Exiting...");
+                                shouldExit = true;
+                                break;
+                            }
+                            const line = `"${embedJSON.fields[i].name}": "${embedJSON.fields[i].value}"`;
+                            newValue = configFile.replace(line, `"${setting}": "${value}"`);
                             fs.writeFileSync("./config.js", newValue);
                             this.client.logger.log(`${message.author.username} (${message.author.id}) wrote new changes to config file!`);
                             message.channel.send(`Updated ${setting} to new value ${value}.`);
