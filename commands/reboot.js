@@ -17,8 +17,8 @@ class Reboot extends Command {
             await message.reply("Bot is shutting down.");
             await Promise.all(this.client.commands.map(cmd => this.client.unloadCommand(cmd)));
             process.exit(1);
-        } catch (e) {
-            console.log(e);
+        } catch (err) {
+            this.client.logger.error(err);
         }
     }
 }

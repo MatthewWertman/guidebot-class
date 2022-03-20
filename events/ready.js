@@ -17,18 +17,18 @@ module.exports = class {
             const rest = new REST({ version: "9" }).setToken(this.client.config.token);
 
             try {
-                console.log("Started refreshing application (/) commands.");
+                this.client.logger.log("Started refreshing application (/) commands.");
                 await rest.put(
                     Routes.applicationCommands(this.client.user.id),
                     { body: this.client.slashCommands },
                 );
 
-                console.log("Successfully registered application commands.");
+                this.client.logger.log("Successfully registered application commands.");
             } catch (error) {
-                console.error(error);
+                this.client.logger.error(error);
             }
         } else {
-            console.log("Skipping to refresh application (/) commands.");
+            this.client.logger.warn("Skipping to refresh application (/) commands.");
         }
 
 
@@ -45,6 +45,6 @@ module.exports = class {
         this.client.user.setActivity(`${this.client.config.botSettings.prefix}help | ${this.client.guilds.cache.size} Servers`);
 
         // Log that we're ready to serve, so we know the bot accepts commands.
-        console.log(`${this.client.user.tag}, ready to serve ${this.client.users.cache.size} users in ${this.client.guilds.cache.size} servers.`, "ready");
+        this.client.logger.log(`${this.client.user.tag}, ready to serve ${this.client.users.cache.size} users in ${this.client.guilds.cache.size} servers.`, "ready");
     }
 };

@@ -44,6 +44,7 @@ class Settings extends Command {
             configFile = fs.readFileSync("./config.js", "utf-8");
             const setting = await this.client.awaitReply(message, "What setting do you want to change?");
             // console.log(setting);
+          
             switch (Object.prototype.toString(setting)) {
                 case "cancel":
                 case "revert all":
@@ -97,7 +98,7 @@ class Settings extends Command {
                             const line = `"${embedJSON.fields[i].name}": "${embedJSON.fields[i].value}"`;
                             newValue = configFile.replace(line, `"${setting}": "${value}"`);
                             fs.writeFileSync("./config.js", newValue);
-                            console.log("Updated config file");
+                            this.client.logger.log(`${message.author.username} (${message.author.id}) wrote new changes to config file!`);
                             message.channel.send(`Updated ${setting} to new value ${value}.`);
                         }
                     }

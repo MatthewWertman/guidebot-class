@@ -50,7 +50,7 @@ This command requires level ${this.client.levelCache[cmd.conf.permLevel]} (${cmd
             message.flags.push(args.shift().slice(1));
         }
 
-        console.log(`${this.client.config.permLevels.find(l => l.level === level).name} ${message.author.username} (${message.author.id}) ran command ${cmd.help.name}`, "cmd");
+        this.client.logger.cmd(`${this.client.config.permLevels.find(l => l.level === level).name} ${message.author.username} (${message.author.id}) ran command ${cmd.help.name}`);
         cmd.run(message, args, level);
     }
 };
