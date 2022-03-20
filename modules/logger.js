@@ -35,8 +35,6 @@ const logger = pino({
 }, transport);
 const { red, magenta, gray, yellow, white, green } = require("colorette");
 const dayjs = require("dayjs");
-const duration = require("dayjs/plugin/duration");
-dayjs.extend(duration);
 
 module.exports = class Logger {
     static log (content, type="log") {
