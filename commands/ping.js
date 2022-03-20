@@ -20,8 +20,8 @@ class Ping extends Command {
         try {
             const msg = await message.channel.send("🏓 Ping!");
             msg.edit(`🏓 Pong! (Roundtrip took: ${msg.createdTimestamp - message.createdTimestamp}ms. 💙: ${Math.round(this.client.ws.ping)}ms.)`);
-        } catch (e) {
-            console.log(e);
+        } catch (err) {
+            this.client.logger.error(err);
         }
     }
 
@@ -30,7 +30,7 @@ class Ping extends Command {
             const initReply = await interaction.reply({content: "🏓 Ping!", fetchReply: true});
             await interaction.editReply(`🏓 Pong! (Roundtrip took: ${initReply.createdTimestamp - interaction.createdTimestamp}ms. 💙: ${Math.round(interaction.client.ws.ping)}ms.)`);
         } catch (err) {
-            console.error(err);
+            this.client.logger.error(err);
         }
     }
 }

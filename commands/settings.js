@@ -41,7 +41,7 @@ class Settings extends Command {
         let defValue;
         while (true) { // eslint-disable-line no-constant-condition
             const setting = await this.client.awaitReply(message, "What setting do you want to change?");
-            console.log(setting);
+            // console.log(setting);
             switch (setting) {
                 case "cancel":
                 case "revert all":
@@ -91,7 +91,7 @@ class Settings extends Command {
                             var value = await this.client.awaitReply(message, `What value should ${setting} be?`);
                             newValue = configFile.replace(new RegExp(`"${embedJSON.fields[i].value}"`), `"${value}"`);
                             fs.writeFileSync("./config.js", newValue);
-                            console.log("Updated config file");
+                            this.client.logger.log(`${message.author.username} (${message.author.id}) wrote new changes to config file!`);
                             message.channel.send(`Updated ${setting} to new value ${value}.`);
                         }
                     }
