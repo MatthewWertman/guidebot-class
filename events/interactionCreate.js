@@ -4,7 +4,7 @@ module.exports = class {
     }
 
     async run (interaction) {
-        console.log(`${interaction.user.tag} in #${interaction.channel.name} triggered an interaction.`);
+        this.client.logger.cmd(`${interaction.user.tag} in #${interaction.channel.name} triggered an interaction.`);
         if (!interaction.isCommand()) return;
 
         const command = this.client.commands.get(interaction.commandName);

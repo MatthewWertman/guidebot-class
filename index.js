@@ -9,10 +9,6 @@ const {
     promisify
 } = require("util");
 const readdir = promisify(require("fs").readdir);
-const dayjs = require("dayjs");
-const log = message => {
-    console.log(`[${dayjs().format("YYYY-MM-DD HH:mm:ss")}] ${message}`);
-};
 
 
 class BoilerPlate extends Client {
@@ -24,6 +20,8 @@ class BoilerPlate extends Client {
         this.commands = new Collection();
         this.slashCommands = [];
         this.aliases = new Collection();
+
+        this.logger = require("./modules/logger.js");
 
         this.wait = require("util").promisify(setTimeout);
     }
@@ -41,10 +39,10 @@ const init = async () => {
 
     // Commands
     const cmdFiles = await readdir("./commands/");
-    log(`Loading a total of ${cmdFiles.length} commands.`);
+    client.logger.log(`Loading a total of ${cmdFiles.length} commands.`);
     cmdFiles.forEach(f => {
         const res = client.loadCommand(f);
-        if (res) console.error(res);
+        if (res) client.logger.error(res);
     });
 
     // Slash commands
@@ -53,7 +51,7 @@ const init = async () => {
             const cmdName = file.split(".")[0];
             const command = new (require(`./commands/${file}`))(client);
             if (command.conf.slashEnable) {
-                console.log(`Loading ${cmdName} as slash command.`);
+                client.logger.log(`Loading ${cmdName} as slash command.`);
                 client.slashCommands.push(command.data.toJSON());
             }
         }
@@ -61,10 +59,10 @@ const init = async () => {
 
     // Events
     const evtFiles = await readdir("./events/");
-    log(`Loading a total of ${evtFiles.length} events.`);
+    client.logger.log(`Loading a total of ${evtFiles.length} events.`);
     evtFiles.forEach(file => {
         const eventName = file.split(".")[0];
-        console.log(`Loading Event: ${eventName}`);
+        client.logger.log(`Loading Event: ${eventName}`);
         const event = new(require(`./events/${file}`))(client);
         client.on(eventName, (...args) => event.run(...args));
         delete require.cache[require.resolve(`./events/${file}`)];
@@ -83,7 +81,7 @@ const init = async () => {
 
 init();
 
-client.on("disconnect", () => console.warn("Bot is disconnecting..."))
-    .on("reconnecting", () => console.log("Bot reconnecting..."))
-    .on("error", e => console.error(e))
-    .on("warn", info => console.warn(info));
+client.on("disconnect", () => client.logger.warn("Bot is disconnecting..."))
+    .on("reconnecting", () => client.logger.log("Bot reconnecting..."))
+    .on("error", e => client.logger.error(e))
+    .on("warn", info => client.logger.warn(info));

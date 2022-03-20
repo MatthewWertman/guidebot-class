@@ -6,6 +6,6 @@ module.exports = class {
     async run (guild) {
 
         this.client.user.setActivity(`${this.client.config.botSettings.prefix}help | ${this.client.guilds.cache.size} Servers`);
-        console.log(`Left guild: ${guild.name} (${guild.id}) with ${guild.memberCount} members`);
+        this.client.logger.log(`Left guild: ${guild.name} (${guild.id}) with ${guild.memberCount} members`);
     }
 };
