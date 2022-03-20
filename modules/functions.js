@@ -28,7 +28,7 @@ module.exports = (client) => {
             });
             return collected.first().content;
         } catch (e) {
-            return false;
+            return new Error("ERROR: LIMIT WAIT TIME EXCEEDED");
         }
     };
 
