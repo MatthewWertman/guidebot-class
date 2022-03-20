@@ -17,6 +17,7 @@ const config = {
         "welcomeMessage": "Say hello to {{user}}, everyone!",
         "updateGlobalSlashes": "true",
         "disableSlashes": "false",
+        "saveLogs": "true"
     },
 
     // PERMISSION LEVEL DEFINITIONS.
