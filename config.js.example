@@ -9,8 +9,8 @@ const config = {
 
     "botSettings": {
         "prefix": "~",
-        "clientId": "",
-        "defaultGuildId": "",
+        "clientId": "0",
+        "defaultGuildId": "0",
         "systemNotice": "true",
         "welcomeEnabled": "false",
         "welcomeChannel": "welcome",
