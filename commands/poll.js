@@ -26,7 +26,7 @@ class Poll extends Command {
         const embed = new MessageEmbed()
             .setColor(0xff0000)
             .setDescription("React with ✅ to vote yes\nReact with ❌ to vote no")
-            .setFooter("React to vote", `${message.author.displayAvatarURL()}`)
+            .setFooter({text: "React to vote", iconURL: `${message.author.displayAvatarURL()}`})
             .setTitle(`${title}`);
         if (image) {
             embed.setImage(args[0]);
