@@ -14,7 +14,7 @@ class Setstatus extends Command {
     }
 
     async run (message, args, level) { //eslint-disable-line no-unused-vars
-        if (!args[0] && args.length === 0) return message.channel.send(`USAGE: ${exports.help.usage}`);
+        if (!args[0] && args.length === 0) return message.channel.send(`USAGE: ${this.help.usage}`);
         var result = args.join(" ");
         if (!result) {
             result = "online";
