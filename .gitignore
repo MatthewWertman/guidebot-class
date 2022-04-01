@@ -60,5 +60,8 @@ typings/
 # dotenv environment variables file
 .env
 
+# uncomment for dependency watch in GitHub
+#package-lock.json
+
 # User directories
 wip/

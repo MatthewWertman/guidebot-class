@@ -38,20 +38,20 @@ Run the following commands:
 ```bash
 $ git clone https://github.com/MatthewWertman/guidebot-class.git
 $ cd guidebot-class
-$ npm install --save
+$ npm install
 ```
 
 Non-Git:
 
 - Download the latest release from the [Releases](https://github.com/MatthewWertman/guidebot-class/releases) and extract to desired location
-- Follow the steps from the Git Section, starting at `npm install --save`. Make sure you are in the right directory!
+- Follow the steps from the Git Section, starting at `npm install`. Make sure you are in the right directory!
 
 
 ### Initial Setup
 
 1. Rename 'config.js.example' to 'config.js' by running this in the termial:
 ```bash
-$ mv config.js.example config.js
+$ cp config.js.example config.js
 ```
 2. Add personal Discord ID and bot token to the config.js file. For more details on how to obtain a bot token, click [here](https://github.com/reactiflux/discord-irc/wiki/Creating-a-discord-bot-&-getting-a-token).
 
