@@ -17,7 +17,7 @@ class Settings extends Command {
             description: "Shows the default settings and allows you to change them.",
             usage: "settings",
             aliases: ["set", "config"],
-            permLevel: "Server Owner"
+            permLevel: "Bot Admin"
         });
     }
 
