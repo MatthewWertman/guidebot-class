@@ -82,6 +82,9 @@ const init = async () => {
 
 init();
 
+// rateLimit event
+client.rest.on('rateLimited', () => client.logger.warn(`Client has reached rate limit of ${rateLimitData.limit}, timed out for ${rateLimitData.timeout} ms!`))
+
 client.on("disconnect", () => client.logger.warn("Bot is disconnecting..."))
     .on("reconnecting", () => client.logger.log("Bot reconnecting..."))
     .on("error", e => client.logger.error(e))
