@@ -1,12 +1,7 @@
 const Command = require("../base/Command.js");
 const { EmbedBuilder } = require("discord.js");
 const fs = require("fs");
-const configEmbed = new EmbedBuilder()
-    .setTitle("Current Settings")
-    .setColor("#d64027")
-    .setDescription("Here are the current settings for the bot.");
 let configFile = fs.readFileSync("./config.js", "utf-8");
-let shouldExit = false;
 
 
 class Settings extends Command {
@@ -23,6 +18,11 @@ class Settings extends Command {
 
     async run (message, args, level) { // eslint-disable-line no-unused-vars
         if (args.length > 0) return message.channel.send(`Too many agruments! USAGE: ${this.help.usage}`);
+        
+        const configEmbed = new EmbedBuilder()
+            .setTitle("Current Settings")
+            .setColor("#d64027")
+            .setDescription("Here are the current settings for the bot.");
 
         // Building embed
         for (const [key, val] of Object.entries(this.client.config.botSettings)) {
@@ -40,12 +40,13 @@ class Settings extends Command {
 
         let newValue;
         let defValue;
+        let shouldExit = false;
         while (!shouldExit) {
             configFile = fs.readFileSync("./config.js", "utf-8");
             const setting = await this.client.awaitReply(message, "What setting do you want to change?");
             // console.log(setting);
           
-            switch (Object.prototype.toString(setting)) {
+            switch (setting) {
                 case "cancel":
                 case "revert all":
                 {
@@ -68,6 +69,7 @@ class Settings extends Command {
                             }
                         }
                     }
+                    shouldExit = true;
                     break;
                 }
                 case "restart":
@@ -79,12 +81,9 @@ class Settings extends Command {
                         await this.client.unloadCommand(cmd);
                     });
                     process.exit(1);
-                    break;
-                }
-                case "[object Object]":
-                    message.channel.send("Timeout or something else occurred. Exiting...");
                     shouldExit = true;
                     break;
+                }
                 default:
                 {
                     for (var i = 0; i < embedJSON.fields.length; i++) {
