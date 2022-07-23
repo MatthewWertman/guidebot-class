@@ -1,7 +1,10 @@
-const fs = require("fs");
-const { Client } = require("discord.js");
 const { REST } = require("@discordjs/rest");
-const { Routes } = require("discord-api-types/v9");
+const {
+    Client,
+    Routes,
+    GatewayIntentBits 
+} = require("discord.js");
+const fs = require("fs");
 
 class commandRegister extends Client {
     constructor (options) {
@@ -12,9 +15,8 @@ class commandRegister extends Client {
     }
 }
 
-const intents = ["GUILDS"];
 const client = new commandRegister({
-    intents: intents
+    intents: [GatewayIntentBits.Guilds]
 });
 
 const commandFiles = fs.readdirSync("./commands").filter(file => file.endsWith(".js"));
@@ -26,7 +28,7 @@ for (const file of commandFiles) {
     }
 }
 
-const rest = new REST({ version: "9" }).setToken(client.config.token);
+const rest = new REST({ version: "10" }).setToken(client.config.token);
 
 (async () => {
     try {
