@@ -11,7 +11,7 @@ NOTE: make sure to check the releases for an updated changelog
 
 Major Changes:
 
-* Updated to Discord.js 13.1.0
+* Updated to Discord.js 14.0.3
 * Removed `better-sqlite3`, `chalk`, `enmap`, `klaw`, `readline-sync` as dependencies
 * Moved functions to modules/functions.js
 * Removed Logger module (replaced with console.log())
@@ -27,7 +27,7 @@ Minor Changes:
 * Removed most comments
 
 ### Prerequisites
-* [Node.js v16.6.0](https://nodejs.org/en/download/) or higher
+* [Node.js v16.9.0](https://nodejs.org/en/download/) or higher
 
 ### Installation
 
