@@ -1,4 +1,4 @@
-const {MessageEmbed} = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const Command = require("../base/Command.js");
 
 
@@ -27,17 +27,17 @@ class Help extends Command {
             const commandNames = [...myCommands.keys()];
             const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
             let currentCategory = "";
-            embed = new MessageEmbed()
+            embed = new EmbedBuilder()
                 .setColor(0xff0000)
                 .setTitle(`= Command List =\n\n[Use ${this.client.config.botSettings.prefix}help <commandname> for details]\n`);
             const sorted = [...myCommands.values()].sort((p, c) => p.help.category > c.help.category ? 1 :  p.help.name > c.help.name && p.help.category === c.help.category ? 1 : -1 );
             sorted.forEach( c => {
                 const cat = c.help.category.toProperCase();
                 if (currentCategory !== cat) {
-                    embed.addField(`\u200b\n== ${cat} ==\n`, "\u200b");
+                    embed.addFields([{name: `\u200b\n== ${cat} ==\n`, value: "\u200b"}]);
                     currentCategory = cat;
                 }
-                embed.addField(`${this.client.config.botSettings.prefix}${c.help.name}${" ".repeat(longest - c.help.name.length)}: ${c.help.description}\n`, "\u200b");
+                embed.addFields([{name: `${this.client.config.botSettings.prefix}${c.help.name}${" ".repeat(longest - c.help.name.length)}: ${c.help.description}\n`, value: "\u200b"}]);
             });
             message.author.send({embeds: [embed]});
         } else {
@@ -46,10 +46,10 @@ class Help extends Command {
             if (this.client.commands.has(command)) {
                 command = this.client.commands.get(command);
                 if (level < this.client.levelCache[command.conf.permLevel]) return;
-                embed = new MessageEmbed()
+                embed = new EmbedBuilder()
                     .setColor(0xff0000)
                     .setTitle(`${command.help.name.toUpperCase()}`)
-                    .addField(`${command.help.description}`, `alises: ${command.conf.aliases.join(", ")}\nusage: ${command.help.usage}`);
+                    .addFields([{name: `${command.help.description}`, value: `alises: ${command.conf.aliases.join(", ")}\nusage: ${command.help.usage}`}]);
                 message.channel.send({embeds: [embed]});
             }
         }
