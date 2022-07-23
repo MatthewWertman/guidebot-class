@@ -3,7 +3,8 @@ if (nVersionArr[0] < 16 && nVersionArr[1] < 9) throw new Error("Node 16.9.0 or h
 
 const {
     Client,
-    Collection
+    Collection,
+    GatewayIntentBits
 } = require("discord.js");
 const {
     promisify
@@ -27,7 +28,7 @@ class BoilerPlate extends Client {
     }
 }
 
-const intents = ["GUILDS", "GUILD_MESSAGES", "DIRECT_MESSAGES"];
+const intents = [GatewayIntentBits.MessageContent, GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.DirectMessages];
 const client = new BoilerPlate({
     intents: intents
 });
