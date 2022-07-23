@@ -1,7 +1,7 @@
 const {
-    EmbedBuilder
+    EmbedBuilder,
+    SlashCommandBuilder
 } = require("discord.js");
-const { SlashCommandBuilder } = require("@discordjs/builders");
 const Command = require("../base/Command.js");
 
 class Info extends Command {

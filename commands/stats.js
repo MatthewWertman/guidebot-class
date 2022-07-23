@@ -2,8 +2,8 @@ const Command = require("../base/Command.js");
 const {
     version,
     EmbedBuilder,
+    SlashCommandBuilder
 } = require("discord.js");
-const { SlashCommandBuilder } = require("@discordjs/builders");
 const dayjs = require("dayjs");
 const duration = require("dayjs/plugin/duration");
 dayjs.extend(duration);
