@@ -1,5 +1,7 @@
-const { MessageEmbed } = require("discord.js");
-const { SlashCommandBuilder } = require("@discordjs/builders");
+const {
+    EmbedBuilder,
+    SlashCommandBuilder
+} = require("discord.js");
 const Command = require("../base/Command.js");
 
 class Info extends Command {
@@ -21,24 +23,26 @@ class Info extends Command {
     }
 
     createUserEmbed (user, member) {
-        return new MessageEmbed()
+        return new EmbedBuilder()
             .setColor("#9689b9")
-            .setAuthor(`${user.tag}`, `${user.displayAvatarURL()}`)
-            .addField("Username", `${user.username}`, true)
-            .addField("Discriminator", `${user.discriminator}`, true)
-            .addField("Display Name", `${member.displayName}`, true)
-            .addField("ID", `${user.id}`, true)
-            .addField("Bot", `${user.bot}`, true)
-            .addField("Created", `${user.createdAt}`, true)
-            .addField("Account Age", `${Math.round((Date.now() - user.createdAt.getTime()) / (1000*60*60*24))} days`, true)
-            .addField("Server Age", `${Math.round((Date.now() - member.joinedAt.getTime()) / (1000*60*60*24))} days`, true)
-            .addField("Roles", `${member.roles.cache.map(role => {
-                for (const index in [...member.roles.cache.keys()].name) {
-                    role += `${[...member.roles.cache.keys()][index]}` + ", ";
-                }
-                return role;
+            .setAuthor({name:`${user.tag}`, iconURL: `${user.displayAvatarURL()}`})
+            .addFields([
+                {name: "Username", value: `${user.username}`, inline: true},
+                {name: "Discriminator", value: `${user.discriminator}`, inline: true},
+                {name: "Display Name", value: `${member.displayName}`, inline: true},
+                {name: "ID", value: `${user.id}`, inline: true},
+                {name: "Bot", value: `${user.bot}`, inline: true},
+                {name: "Created", value: `${user.createdAt}`, inline: true},
+                {name: "Account Age", value: `${Math.round((Date.now() - user.createdAt.getTime()) / (1000*60*60*24))} days`, inline: true},
+                {name: "Server Age", value: `${Math.round((Date.now() - member.joinedAt.getTime()) / (1000*60*60*24))} days`, inline: true},
+                {name: "Roles", value: `${member.roles.cache.map(role => {
+                    for (const index in [...member.roles.cache.keys()].name) {
+                        role += `${[...member.roles.cache.keys()][index]}` + ", ";
+                    }
+                    return role;
 
-            })}`, true);
+                })}`, inline: true}
+            ])
     }
 
     async run (message, args, level) { //eslint-disable-line no-unused-vars

@@ -1,7 +1,7 @@
 const Command = require("../base/Command.js");
-const {MessageEmbed} = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const fs = require("fs");
-const configEmbed = new MessageEmbed()
+const configEmbed = new EmbedBuilder()
     .setTitle("Current Settings")
     .setColor("#d64027")
     .setDescription("Here are the current settings for the bot.");
@@ -27,12 +27,12 @@ class Settings extends Command {
         // Building embed
         for (const [key, val] of Object.entries(this.client.config.botSettings)) {
             if (typeof val == "object") {
-                configEmbed.addField(`== ${key.toProperCase()} ==`, "\u200b");
+                configEmbed.addFields([{ name: `== ${key.toProperCase()} ==`, value: "\u200b"}]);
                 for (const [sKey, sVal] of Object.entries(val)) {
-                    configEmbed.addField(`${sKey}`, `${sVal}`);
+                    configEmbed.addFields([{name: `${sKey}`, value: `${sVal}`}]);
                 }
             } else {
-                configEmbed.addField(`${key}`, `${val}`);
+                configEmbed.addFields([{name: `${key}`, value: `${val}`}]);
             }
         }
         var embedJSON = configEmbed.toJSON();

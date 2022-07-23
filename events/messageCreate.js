@@ -1,3 +1,5 @@
+const { PermissionsBitField } = require("discord.js");
+
 module.exports = class {
     constructor (client) {
         this.client = client;
@@ -6,8 +8,7 @@ module.exports = class {
     async run (message) {
         if (message.author.bot) return;
 
-        if (message.guild && !message.channel.permissionsFor(message.guild.me).missing("SEND_MESSAGES")) return;
-
+        if (message.guild && !message.channel.permissionsFor(message.guild.members.me).missing(PermissionsBitField.Flags.SendMessages)) return;
         const prefixMention = new RegExp(`^<@!?${this.client.user.id}> ?$`);
         if (message.content.match(prefixMention)) {
             return message.reply(`My prefix on this guild is \`${this.client.config.botSettings.prefix}\``);

@@ -1,3 +1,5 @@
+const { InteractionType } = require("discord.js");
+
 module.exports = class {
     constructor (client) {
         this.client = client;
@@ -5,7 +7,7 @@ module.exports = class {
 
     async run (interaction) {
         this.client.logger.cmd(`${interaction.user.tag} in #${interaction.channel.name} triggered an interaction.`);
-        if (!interaction.isCommand()) return;
+        if (!interaction.type === InteractionType.ApplicationCommand) return;
 
         const command = this.client.commands.get(interaction.commandName);
 
