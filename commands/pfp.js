@@ -13,7 +13,7 @@ class Pfp extends Command {
                 .setDescription("Sends a link of your or another user's avatar.")
                 .addUserOption(option => option.setName("target").setDescription("Select a user")),
             slashEnable: true,
-            usage: "pfp [member], where [member] is an optional mentioned member.",
+            usage: "pfp [member], where [member] is an mentioned guild member.",
             aliases: [],
             permLevel: "User"
         });

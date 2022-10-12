@@ -13,6 +13,7 @@ class Eval extends Command {
     }
 
     async run (message, args, level) { // eslint-disable-line no-unused-vars
+        if (!args[0] && args.length === 0) return message.channel.send(`Please input expression. USAGE: ${this.help.usage}`);
         const code = args.join(" ");
         try {
             const evaled = eval(code);

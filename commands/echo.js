@@ -27,7 +27,7 @@ class Echo extends Command {
     }
 
     async run (message, args, level) { //eslint-disable-line no-unused-vars
-        if (!args && args.size < 1) return message.channel.send(`Please input text. USAGE: ${this.help.usage}`);
+        if (!args[0] && args.length === 0) return message.channel.send(`Please input text. USAGE: ${this.help.usage}`);
         let channel;
         var text = args.slice(1, args.length).join(" ");
 

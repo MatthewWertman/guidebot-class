@@ -42,11 +42,11 @@ class Info extends Command {
                     return role;
 
                 })}`, inline: true}
-            ])
+            ]);
     }
 
     async run (message, args, level) { //eslint-disable-line no-unused-vars
-        if (!message.mentions.users.size) return message.channel.send(`You need to mention someone. ${this.help.usage}`);
+        if (!message.mentions.users.size) return message.channel.send(`You need to mention someone. USAGE: ${this.help.usage}`);
         const user = message.mentions.users.first();
         const member = message.guild.members.cache.get(user.id);
         const userEmbed = this.createUserEmbed(user, member);
