@@ -1,5 +1,7 @@
 const nVersionArr = process.version.slice(1).split(".").map((x) => +x);
-if (nVersionArr[0] < 16 && nVersionArr[1] < 9) throw new Error("Node 16.9.0 or higher is required. Update Node on your system.");
+if (nVersionArr[0] < 16 && nVersionArr[1] < 9) {
+    throw new Error("Node 16.9.0 or higher is required. Update Node on your system.");
+}
 
 const {
     Client,
@@ -28,7 +30,13 @@ class BoilerPlate extends Client {
     }
 }
 
-const intents = [GatewayIntentBits.MessageContent, GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers, GatewayIntentBits.GuildMessages, GatewayIntentBits.DirectMessages];
+const intents = [
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.DirectMessages
+];
 const client = new BoilerPlate({
     intents: intents
 });
@@ -83,7 +91,12 @@ const init = async () => {
 init();
 
 // rateLimit event
-client.rest.on('rateLimited', () => client.logger.warn(`Client has reached rate limit of ${rateLimitData.limit}, timed out for ${rateLimitData.timeout} ms!`))
+client.rest.on("rateLimited", () => {
+    client.logger.warn(
+        // eslint-disable-next-line no-undef
+        `Client has reached rate limit of ${rateLimitData.limit}, timed out for ${rateLimitData.timeout} ms!`
+    );
+});
 
 client.on("disconnect", () => client.logger.warn("Bot is disconnecting..."))
     .on("reconnecting", () => client.logger.log("Bot reconnecting..."))
