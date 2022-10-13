@@ -11,13 +11,14 @@ NOTE: make sure to check the releases for an updated changelog
 
 Major Changes:
 
-* Updated to Discord.js 14.0.3
+* Updated to Discord.js 14.6.0
 * Removed `better-sqlite3`, `chalk`, `enmap`, `klaw`, `readline-sync` as dependencies
 * Moved functions to modules/functions.js
-* Removed Logger module (replaced with console.log())
+* Replaced original logger with `pino` logger.
 * Removed conf and set command files
 * Removed 'setup.js' and npm preinstall script
 * Added `setactivity`, `setstatus`, `info`, `pfp`, `settings` and `echo` commands
+* Added support for slash commands (even being able to duel-load commands).
 
 
 Minor Changes:
@@ -61,9 +62,9 @@ $ cp config.js.example config.js
 
 You can either run:
 ```bash
-$ node index.js
+node index.js
 ```
 or
 ```bash
-$ npm start
+npm start
 ```
