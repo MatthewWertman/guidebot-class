@@ -1,5 +1,4 @@
-const { REST } = require("@discordjs/rest");
-const { Routes } = require("discord-api-types/v9");
+const { REST, Routes } = require("discord.js");
 
 module.exports = class {
     constructor (client) {
@@ -14,7 +13,7 @@ module.exports = class {
         await this.client.wait(1000);
 
         if (this.client.config.botSettings.updateGlobalSlashes === "true") {
-            const rest = new REST({ version: "9" }).setToken(this.client.config.token);
+            const rest = new REST({ version: "10" }).setToken(this.client.config.token);
 
             try {
                 this.client.logger.log("Started refreshing application (/) commands.");
