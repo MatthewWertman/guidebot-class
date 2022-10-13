@@ -20,8 +20,7 @@ class Echo extends Command {
                 ),
             slashEnable: true,
             usage: "echo [channel] <text>",
-            aliases: ["ev"],
-            permLevel: "User"
+            aliases: ["ev"]
         });
     }
 

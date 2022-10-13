@@ -4,12 +4,12 @@ class Command {
         name = null,
         description = "No description provided.",
         category = "Miscellaneous",
-        enabled = true,
         slashBuilder = null,
         slashEnable = false,
+        enabled = true,
         guildOnly = false,
         usage = "No usage provided.",
-        aliases = new Array(),
+        aliases = [],
         permLevel = "User"
     }) {
         this.client = client;

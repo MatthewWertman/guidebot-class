@@ -7,15 +7,12 @@ class Pfp extends Command {
         super(client, {
             name: "pfp",
             description: "Sends a link of your avatar.",
-            category:"Miscellaneous",
             slashBuilder: new SlashCommandBuilder()
                 .setName("pfp")
                 .setDescription("Sends a link of your or another user's avatar.")
                 .addUserOption(option => option.setName("target").setDescription("Select a user")),
             slashEnable: true,
-            usage: "pfp [member], where [member] is an mentioned guild member.",
-            aliases: [],
-            permLevel: "User"
+            usage: "pfp [member], where [member] is an mentioned guild member."
         });
     }
 

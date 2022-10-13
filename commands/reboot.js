@@ -7,8 +7,7 @@ class Reboot extends Command {
             description: "If running under PM2, bot will restart.",
             category: "System",
             usage: "reboot",
-            permLevel: "Bot Admin",
-            aliases: []
+            permLevel: "Bot Admin"
         });
     }
 

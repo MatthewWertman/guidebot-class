@@ -18,7 +18,7 @@ class Stats extends Command {
                 .setName("stats")
                 .setDescription("Gives some useful bot statistics."),
             slashEnable: true,
-            usage: "stats",
+            usage: "stats"
         });
     }
 

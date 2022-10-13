@@ -9,7 +9,6 @@ class Info extends Command {
         super(client, {
             name: "info",
             description: "Shows some information about a mentioned user",
-            category: "Miscellaneous",
             slashBuilder: new SlashCommandBuilder()
                 .setName("info")
                 .setDescription("Shows some information about a mentioned user.")
@@ -17,8 +16,7 @@ class Info extends Command {
             slashEnable: true,
             guildOnly: true,
             usage: "info @user",
-            aliases: ["i", "user"],
-            permLevel: "User"
+            aliases: ["i", "user"]
         });
     }
 
