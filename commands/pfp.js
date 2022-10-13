@@ -8,7 +8,7 @@ class Pfp extends Command {
             name: "pfp",
             description: "Sends a link of your avatar.",
             category:"Miscellaneous",
-            data: new SlashCommandBuilder()
+            slashBuilder: new SlashCommandBuilder()
                 .setName("pfp")
                 .setDescription("Sends a link of your or another user's avatar.")
                 .addUserOption(option => option.setName("target").setDescription("Select a user")),

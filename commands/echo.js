@@ -6,8 +6,7 @@ class Echo extends Command {
         super(client, {
             name: "echo",
             description: "Repeats what you say.",
-            category: "Miscellaneous",
-            data: new SlashCommandBuilder()
+            slashBuilder: new SlashCommandBuilder()
                 .setName("echo")
                 .setDescription("Replies with your input!")
                 .addStringOption(option =>

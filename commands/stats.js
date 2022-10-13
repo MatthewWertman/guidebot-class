@@ -14,7 +14,7 @@ class Stats extends Command {
             name: "stats",
             description: "Gives some useful bot statistics.",
             category: "System",
-            data: new SlashCommandBuilder()
+            slashBuilder: new SlashCommandBuilder()
                 .setName("stats")
                 .setDescription("Gives some useful bot statistics."),
             slashEnable: true,

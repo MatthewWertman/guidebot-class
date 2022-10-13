@@ -6,7 +6,7 @@ class MyLevel extends Command {
         super(client, {
             name: "mylevel",
             description: "Displays your permission level for your location.",
-            data: new SlashCommandBuilder()
+            slashBuilder: new SlashCommandBuilder()
                 .setName("mylevel")
                 .setDescription("Displays your permission level for your location."),
             slashEnable: true,

@@ -53,7 +53,7 @@ const init = async () => {
             const command = new (require(`./commands/${file}`))(client);
             if (command.conf.slashEnable) {
                 client.logger.log(`Loading ${cmdName} as slash command.`);
-                client.slashCommands.push(command.data.toJSON());
+                client.slashCommands.push(command.slashBuilder.toJSON());
             }
         }
     }

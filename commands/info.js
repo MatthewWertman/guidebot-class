@@ -10,7 +10,7 @@ class Info extends Command {
             name: "info",
             description: "Shows some information about a mentioned user",
             category: "Miscellaneous",
-            data: new SlashCommandBuilder()
+            slashBuilder: new SlashCommandBuilder()
                 .setName("info")
                 .setDescription("Shows some information about a mentioned user.")
                 .addUserOption(option => option.setName("target").setDescription("User to get info on.").setRequired(true)),
