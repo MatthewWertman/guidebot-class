@@ -1,6 +1,6 @@
 {
     "name": "boilerplate-class",
-    "version": "6.1.5",
+    "version": "6.1.6",
     "description": "A modified Discord bot boilerplate (w/ classes). Forked from guidebot-class",
     "main": "index.js",
     "scripts": {
