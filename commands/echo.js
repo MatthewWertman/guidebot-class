@@ -6,8 +6,7 @@ class Echo extends Command {
         super(client, {
             name: "echo",
             description: "Repeats what you say.",
-            category: "Miscellaneous",
-            data: new SlashCommandBuilder()
+            slashBuilder: new SlashCommandBuilder()
                 .setName("echo")
                 .setDescription("Replies with your input!")
                 .addStringOption(option =>
@@ -21,13 +20,12 @@ class Echo extends Command {
                 ),
             slashEnable: true,
             usage: "echo [channel] <text>",
-            aliases: ["ev"],
-            permLevel: "User"
+            aliases: ["ev"]
         });
     }
 
     async run (message, args, level) { //eslint-disable-line no-unused-vars
-        if (!args && args.size < 1) return message.channel.send(`Please input text. USAGE: ${this.help.usage}`);
+        if (!args[0] && args.length === 0) return message.channel.send(`Please input text. USAGE: ${this.help.usage}`);
         let channel;
         var text = args.slice(1, args.length).join(" ");
 

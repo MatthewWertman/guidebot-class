@@ -6,12 +6,12 @@ class MyLevel extends Command {
         super(client, {
             name: "mylevel",
             description: "Displays your permission level for your location.",
-            data: new SlashCommandBuilder()
+            slashBuilder: new SlashCommandBuilder()
                 .setName("mylevel")
                 .setDescription("Displays your permission level for your location."),
             slashEnable: true,
-            usage: "mylevel",
-            guildOnly: true
+            guildOnly: true,
+            usage: "mylevel"
         });
     }
 
@@ -19,7 +19,7 @@ class MyLevel extends Command {
         const friendly = this.client.config.permLevels.find(l => l.level === level).name;
         message.reply(`Your permission level is: ${level} - ${friendly}`);
     }
-    
+
     async interact (interaction) {
         const level = this.client.permlevel(interaction);
         const lvlName = this.client.config.permLevels.find(l => l.level === level).name;

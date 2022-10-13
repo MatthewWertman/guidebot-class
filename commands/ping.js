@@ -7,7 +7,7 @@ class Ping extends Command {
             name: "ping",
             description: "Latency and API response times.",
             category: "System",
-            data: new SlashCommandBuilder()
+            slashBuilder: new SlashCommandBuilder()
                 .setName("ping")
                 .setDescription("Latency and API response times."),
             slashEnable: true,

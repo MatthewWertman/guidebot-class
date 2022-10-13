@@ -1,8 +1,8 @@
-const { REST } = require("@discordjs/rest");
 const {
     Client,
     Routes,
-    GatewayIntentBits 
+    REST,
+    GatewayIntentBits
 } = require("discord.js");
 const fs = require("fs");
 

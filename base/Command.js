@@ -4,16 +4,16 @@ class Command {
         name = null,
         description = "No description provided.",
         category = "Miscellaneous",
-        data = null,
-        enabled = true,
+        slashBuilder = null,
         slashEnable = false,
+        enabled = true,
         guildOnly = false,
         usage = "No usage provided.",
-        aliases = new Array(),
+        aliases = [],
         permLevel = "User"
     }) {
         this.client = client;
-        this.data = data;
+        this.slashBuilder = slashBuilder;
         this.conf = { enabled, slashEnable, guildOnly, aliases, permLevel };
         this.help = { name, description, category, usage };
     }

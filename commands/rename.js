@@ -14,7 +14,7 @@ class Rename extends Command {
     }
 
     async run (message, args, level) { //eslint-disable-line no-unused-vars
-        if (!args[0] && args.length === 0) return message.channel.send(`USAGE: ${this.help.usage}`);
+        if (!args[0] && args.length === 0) return message.channel.send(`You need to supply an new nickname. USAGE: ${this.help.usage}`);
         let name = await this.client.clean(args.join(" "));
         if (name.length > 32) name = name.substring(0, 32);
         switch (name) {

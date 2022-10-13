@@ -9,16 +9,14 @@ class Info extends Command {
         super(client, {
             name: "info",
             description: "Shows some information about a mentioned user",
-            category: "Miscellaneous",
-            data: new SlashCommandBuilder()
+            slashBuilder: new SlashCommandBuilder()
                 .setName("info")
                 .setDescription("Shows some information about a mentioned user.")
                 .addUserOption(option => option.setName("target").setDescription("User to get info on.").setRequired(true)),
             slashEnable: true,
             guildOnly: true,
             usage: "info @user",
-            aliases: ["i", "user"],
-            permLevel: "User"
+            aliases: ["i", "user"]
         });
     }
 
@@ -42,11 +40,11 @@ class Info extends Command {
                     return role;
 
                 })}`, inline: true}
-            ])
+            ]);
     }
 
     async run (message, args, level) { //eslint-disable-line no-unused-vars
-        if (!message.mentions.users.size) return message.channel.send(`You need to mention someone. ${this.help.usage}`);
+        if (!message.mentions.users.size) return message.channel.send(`You need to mention someone. USAGE: ${this.help.usage}`);
         const user = message.mentions.users.first();
         const member = message.guild.members.cache.get(user.id);
         const userEmbed = this.createUserEmbed(user, member);
