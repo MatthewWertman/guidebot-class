@@ -8,7 +8,7 @@ class Help extends Command {
             name: "help",
             description: "Displays all the available commands for you.",
             category: "System",
-            usage: "help [command]",
+            usage: "help [command/alias]",
             aliases: ["h", "halp"]
         });
     }
@@ -42,16 +42,14 @@ class Help extends Command {
             message.author.send({embeds: [embed]});
         } else {
             // Show individual command's help.
-            let command = args[0];
-            if (this.client.commands.has(command)) {
-                command = this.client.commands.get(command);
-                if (level < this.client.levelCache[command.conf.permLevel]) return;
-                embed = new EmbedBuilder()
-                    .setColor("#ff1511")
-                    .setTitle(`${command.help.name.toUpperCase()}`)
-                    .addFields([{name: `${command.help.description}`, value: `aliases: ${command.conf.aliases.join(", ")}\nusage: ${command.help.usage}`}]);
-                message.channel.send({embeds: [embed]});
-            }
+            const command = this.client.commands.get(args[0]) || this.client.commands.get(this.client.aliases.get(args[0]));
+            if (!command) return message.channel.send(`${args[0]} is not a known command or alias. USAGE: ${this.client.config.botSettings.prefix}${this.help.usage}`);
+            if (level < this.client.levelCache[command.conf.permLevel]) return;
+            embed = new EmbedBuilder()
+                .setColor("#ff1511")
+                .setTitle(`${command.help.name.toUpperCase()}`)
+                .addFields([{name: `${command.help.description}`, value: `aliases: ${command.conf.aliases.join(", ")}\nusage: ${this.client.config.botSettings.prefix}${command.help.usage}`}]);
+            message.channel.send({embeds: [embed]});
         }
     }
 }
