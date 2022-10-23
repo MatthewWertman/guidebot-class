@@ -93,7 +93,7 @@ init();
 // rateLimit event
 client.rest.on("rateLimited", (rateLimitData) => {
     client.logger.warn(
-        `Client has reached rate limit of ${rateLimitData.limit}, timed out for ${rateLimitData.timeout} ms!`
+        `Client has reached rate limit of ${rateLimitData.limit}, timed out for ${rateLimitData.timeToReset} ms!`
     );
 });
 
