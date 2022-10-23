@@ -28,7 +28,7 @@ class Help extends Command {
             const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
             let currentCategory = "";
             embed = new EmbedBuilder()
-                .setColor(0xff0000)
+                .setColor("#ff1511")
                 .setTitle(`= Command List =\n\n[Use ${this.client.config.botSettings.prefix}help <commandname> for details]\n`);
             const sorted = [...myCommands.values()].sort((p, c) => p.help.category > c.help.category ? 1 :  p.help.name > c.help.name && p.help.category === c.help.category ? 1 : -1 );
             sorted.forEach( c => {
@@ -47,7 +47,7 @@ class Help extends Command {
                 command = this.client.commands.get(command);
                 if (level < this.client.levelCache[command.conf.permLevel]) return;
                 embed = new EmbedBuilder()
-                    .setColor(0xff0000)
+                    .setColor("#ff1511")
                     .setTitle(`${command.help.name.toUpperCase()}`)
                     .addFields([{name: `${command.help.description}`, value: `alises: ${command.conf.aliases.join(", ")}\nusage: ${command.help.usage}`}]);
                 message.channel.send({embeds: [embed]});

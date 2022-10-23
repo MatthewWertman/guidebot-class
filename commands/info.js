@@ -22,7 +22,7 @@ class Info extends Command {
 
     createUserEmbed (user, member) {
         return new EmbedBuilder()
-            .setColor("#9689b9")
+            .setColor("#ff1511")
             .setAuthor({name:`${user.tag}`, iconURL: `${user.displayAvatarURL()}`})
             .addFields([
                 {name: "Username", value: `${user.username}`, inline: true},

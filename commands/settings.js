@@ -18,10 +18,10 @@ class Settings extends Command {
 
     async run (message, args, level) { // eslint-disable-line no-unused-vars
         if (args.length > 0) return message.channel.send(`Too many agruments! USAGE: ${this.help.usage}`);
-        
+
         const configEmbed = new EmbedBuilder()
             .setTitle("Current Settings")
-            .setColor("#d64027")
+            .setColor("#ff1511")
             .setDescription("Here are the current settings for the bot.");
 
         // Building embed
@@ -45,7 +45,7 @@ class Settings extends Command {
             configFile = fs.readFileSync("./config.js", "utf-8");
             const setting = await this.client.awaitReply(message, "What setting do you want to change?");
             // console.log(setting);
-          
+
             switch (setting) {
                 case "cancel":
                 case "revert all":

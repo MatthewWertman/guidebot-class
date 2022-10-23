@@ -25,7 +25,7 @@ class Stats extends Command {
     createStatsEmbed () {
         const duration = dayjs.duration(this.client.uptime).format(" D [days], H [hrs], m [mins], s [secs]");
         return new EmbedBuilder()
-            .setColor(0x00ff00)
+            .setColor("#ff1511")
             .setTitle("STATISTICS")
             .addFields([{name: "🤓", value: `• Mem Usage: ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB\n• Uptime: ${duration}\n• Users: ${this.client.users.cache.size.toLocaleString()}\n• Servers: ${this.client.guilds.cache.size.toLocaleString()}\n• Channels: ${this.client.channels.cache.size.toLocaleString()}\n• Discord.js: v${version}\n• Node: ${process.version}`}]);
     }
