@@ -1,26 +1,27 @@
+/*eslint no-undef: 0 */ // -> OFF
+const assert = require("assert");
 const {
     Client
 } = require("discord.js");
 const client = new Client({
     intents: []
-})
+});
 const {promisify} = require("util");
 const readdir = promisify(require("fs").readdir);
 
-describe("Testing events files...", () => {
-    it("loads existing event files", function () {
+describe("Event", function () {
+    describe("require(event)", function () {
+        it("ensure all eventf files can be loaded", async function () {
 
-        readdir("./events/", (err, files) => {
-            if (err) console.error(err);
-            files.forEach(f => {
+            const evtFiles = await readdir("./events/");
+            evtFiles.forEach(f => {
                 const eventName = f.split(".")[0];
                 console.log(`Loading Event: ${eventName}`);
-                const event = new(require(`../events/${f}`))(client);
-                client.on(eventName, (...args) => event.run(...args));
-                delete require.cache[require.resolve(`../events/${f}`)];
+                new(require(`../events/${f}`))(client);
+                assert.ok(require.cache[require.resolve(`../events/${f}`)]);
             });
-        });
 
-        client.destroy();
+            client.destroy();
+        });
     });
 });
