@@ -1,4 +1,7 @@
-const { EmbedBuilder } = require("discord.js");
+const {
+    inlineCode,
+    EmbedBuilder
+} = require("discord.js");
 const Command = require("../base/Command.js");
 
 
@@ -48,7 +51,7 @@ class Help extends Command {
             embed = new EmbedBuilder()
                 .setColor("#ff1511")
                 .setTitle(`${command.help.name.toUpperCase()}`)
-                .addFields([{name: `${command.help.description}`, value: `aliases: ${command.conf.aliases.join(", ")}\nusage: ${this.client.config.botSettings.prefix}${command.help.usage}`}]);
+                .addFields([{name: `${command.help.description}`, value: `aliases: ${command.conf.aliases.join(", ")}\nusage: ${command.help.usage}\nexample: ${ command.help.example ? inlineCode(`${this.client.config.botSettings.prefix}${command.help.example}`) : "None"}`}]);
             message.channel.send({embeds: [embed]});
         }
     }

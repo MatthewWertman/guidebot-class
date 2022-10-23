@@ -9,13 +9,14 @@ class Command {
         enabled = true,
         guildOnly = false,
         usage = "No usage provided.",
+        example = false,
         aliases = [],
         permLevel = "User"
     }) {
         this.client = client;
         this.slashBuilder = slashBuilder;
         this.conf = { enabled, slashEnable, guildOnly, aliases, permLevel };
-        this.help = { name, description, category, usage };
+        this.help = { name, description, category, usage, example};
     }
 }
 module.exports = Command;
