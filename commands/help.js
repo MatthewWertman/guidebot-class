@@ -54,7 +54,8 @@ class Help extends Command {
                 .addFields([
                     {name: `${command.help.description}`, value: `aliases: ${command.conf.aliases.join(", ")}
                     usage: ${command.help.usage}
-                    example: ${command.help.example ? inlineCode(`${this.client.config.botSettings.prefix}${command.help.example}`) : "None"}`
+                    example: ${command.help.example ? inlineCode(`${this.client.config.botSettings.prefix}${command.help.example}`) : "None"}\
+                    ${command.conf.guildOnly ? "\nguildOnly: true" : ""}`
                     }]);
             message.channel.send({embeds: [embed]});
         }
