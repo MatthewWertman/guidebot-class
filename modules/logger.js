@@ -1,5 +1,6 @@
-const config = require("../config.js");
+const dayjs = require("dayjs");
 const pino = require("pino");
+const config = require("../config.js");
 let transport = pino.transport({
     target: "pino-pretty",
     options: {
@@ -7,6 +8,9 @@ let transport = pino.transport({
     }
 });
 if (config.botSettings.saveLogs === "true") {
+    const logDestination = config.botSettings.logDestination
+        .replace("{{pid}}", process.pid)
+        .replace("{{date}}", dayjs().format("YYYY-MM-DD-HH:mm:ss"));
     const { access, constants } = require("fs");
     const mkdir = require("fs/promises").mkdir;
     access("./logs", constants.F_OK, (err) => {
@@ -25,7 +29,7 @@ if (config.botSettings.saveLogs === "true") {
             level: "debug",
             target: "pino/file",
             options: {
-                destination: `logs/debug-rollbot[${process.pid}].log`
+                destination: logDestination
             }
         }]
     });
@@ -34,7 +38,6 @@ const logger = pino({
     level: "debug"
 }, transport);
 const { red, magenta, gray, yellow, white, green } = require("colorette");
-const dayjs = require("dayjs");
 
 module.exports = class Logger {
     static log (content, type="log") {
