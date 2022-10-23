@@ -49,7 +49,7 @@ class Help extends Command {
                 embed = new EmbedBuilder()
                     .setColor("#ff1511")
                     .setTitle(`${command.help.name.toUpperCase()}`)
-                    .addFields([{name: `${command.help.description}`, value: `alises: ${command.conf.aliases.join(", ")}\nusage: ${command.help.usage}`}]);
+                    .addFields([{name: `${command.help.description}`, value: `aliases: ${command.conf.aliases.join(", ")}\nusage: ${command.help.usage}`}]);
                 message.channel.send({embeds: [embed]});
             }
         }
