@@ -91,9 +91,8 @@ const init = async () => {
 init();
 
 // rateLimit event
-client.rest.on("rateLimited", () => {
+client.rest.on("rateLimited", (rateLimitData) => {
     client.logger.warn(
-        // eslint-disable-next-line no-undef
         `Client has reached rate limit of ${rateLimitData.limit}, timed out for ${rateLimitData.timeout} ms!`
     );
 });
