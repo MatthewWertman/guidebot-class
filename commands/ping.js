@@ -1,5 +1,5 @@
 const Command = require("../base/Command.js");
-const { SlashCommandBuilder } = require("@discordjs/builders");
+const { SlashCommandBuilder } = require("discord.js");
 
 class Ping extends Command {
     constructor (client) {
