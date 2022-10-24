@@ -7,7 +7,7 @@ class Setstatus extends Command {
             name: "setstatus",
             category: "Config",
             description: "sets the bot's current state",
-            usage: "setstatus <online|idle|invisible|dnd>",
+            usage: "setstatus <online | idle | invisible | dnd>",
             aliases: ["setStat", "ss"],
             permLevel: "Bot Support"
         });

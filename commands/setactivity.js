@@ -7,7 +7,8 @@ class Setactivity extends Command {
             name: "setactivity",
             category: "Config",
             description: "sets what the bot is \"doing\"",
-            usage: "setactivity <type> <url> <activity>. type is an optional parameter.\n 0 = 'PLAYING', 1 = 'STREAMING', 2 = 'LISTENING' and 3 = 'WATCHING'\n if option is STREAMING, then the <url> parameter is required.",
+            usage: "setactivity <type> <?url> <activity>. type is an optional parameter.\n 0 = 'PLAYING', 1 = 'STREAMING', 2 = 'LISTENING' and 3 = 'WATCHING'\n if option is STREAMING, then the <url> parameter is required.",
+            example: "setactivity 0 a game!",
             aliases: ["setGame", "setAct", "sa", "game"],
             permLevel: "Bot Support"
         });

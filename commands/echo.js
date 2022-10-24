@@ -19,8 +19,9 @@ class Echo extends Command {
                         .setDescription("The channel to send input to.")
                 ),
             slashEnable: true,
-            usage: "echo [channel] <text>",
-            aliases: ["ev"]
+            usage: "echo [#channel | channel] <text>",
+            example: "echo #general Hello!",
+            aliases: ["say", "ec"]
         });
     }
 

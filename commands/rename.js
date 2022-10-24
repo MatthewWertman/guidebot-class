@@ -7,8 +7,8 @@ class Rename extends Command {
             description: "Changes bot nickname",
             category: "Config",
             guildOnly: true,
-            usage: "rename <nickname>|reset",
-            aliases: ["name"],
+            usage: "rename <nickname> | reset",
+            aliases: ["nick", "name"],
             permLevel: "Server Owner"
         });
     }

@@ -16,6 +16,7 @@ class Info extends Command {
             slashEnable: true,
             guildOnly: true,
             usage: "info @user",
+            example: "info @Golbin",
             aliases: ["i", "user"]
         });
     }
