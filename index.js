@@ -19,7 +19,8 @@ class BoilerPlate extends Client {
         super(options);
 
         this.config = require("./config.js");
-
+        this.guildConfs = require("./guildconfs.json").guilds;
+        
         this.commands = new Collection();
         this.slashCommands = [];
         this.aliases = new Collection();

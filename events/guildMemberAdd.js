@@ -4,9 +4,11 @@ module.exports = class {
     }
 
     async run (member) {
-        if (this.client.config.botSettings.welcomeEnabled !== "true") return;
-        const welcomeMessage = this.client.config.botSettings.welcomeMessage.replace("{{user}}", member.user.tag);
+        const foundGuild = this.client.guildConfs.find(guild => guild.id === member.guild.id);
+        
+        if (foundGuild.guildSettings.welcomeEnabled !== "true") return;
+        const welcomeMessage = foundGuild.guildSettings.welcomeMessage.replace("{{user}}", member.user.tag);
 
-        member.guild.channels.cache.find(c => c.name === this.client.config.botSettings.welcomeChannel).send(welcomeMessage).catch(console.error);
+        member.guild.channels.cache.find(c => c.name === foundGuild.guildSettings.welcomeChannel).send(welcomeMessage).catch(console.error);
     }
 };
