@@ -1,6 +1,6 @@
 const nVersionArr = process.version.slice(1).split(".").map((x) => +x);
-if (nVersionArr[0] < 16 && nVersionArr[1] < 9) {
-    throw new Error("Node 16.9.0 or higher is required. Update Node on your system.");
+if (nVersionArr[0] < 16 && nVersionArr[1] < 11) {
+    throw new Error("Node 16.11.0 or higher is required. Update Node on your system.");
 }
 
 const {
@@ -20,7 +20,7 @@ class BoilerPlate extends Client {
 
         this.config = require("./config.js");
         this.guildConfs = require("./guildconfs.json").guilds;
-        
+
         this.commands = new Collection();
         this.slashCommands = [];
         this.aliases = new Collection();
